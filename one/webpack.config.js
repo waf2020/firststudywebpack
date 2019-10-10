@@ -13,8 +13,26 @@ module.exports={
     devServer:{
            port:3000,
         open:true,
-        contentBase:'src',
+
         hot:true
+    },
+    module:{
+        rules: [
+            {test:/.css$/,use:['style-loader','css-loader','less-loader']},
+            {test:/.(jpg|jpeg|png|gif)$/,use:['url-loader']},
+           /* {
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['env','stage-0'],
+                        plugins: ['@babel/plugin-proposal-class-properties','transform-runtime']
+                    }
+                }
+            }*/
+            {test:/.js$/,use:['babel-loader'],exclude:/node_modules/}
+        ]
     }
 
 };

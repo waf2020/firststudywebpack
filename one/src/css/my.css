@@ -1,0 +1,11 @@
+
+ul {
+    list-style: circle;
+}
+
+.box {
+    width: 200px;
+    height: 200px;
+    background-image: url('../images/time.jpg');
+    background-size: cover;
+}
