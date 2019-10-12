@@ -1,4 +1,6 @@
 const path=require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const vueLoaderPlugin=require('vue-loader/lib/plugin')
 //导出一个配置对象，将来webpack在启动的时候，会默认来查找webpack.config.js 并读取这个文件中的配置对象
 //来进行打包处理
 module.exports={
@@ -12,27 +14,30 @@ module.exports={
         },
     devServer:{
            port:3000,
-        open:true,
-
-        hot:true
+           open:true,
+           contentBase:'src',
+           hot:true
     },
     module:{
         rules: [
             {test:/.css$/,use:['style-loader','css-loader','less-loader']},
             {test:/.(jpg|jpeg|png|gif)$/,use:['url-loader']},
-           /* {
-                test: /\.js$/,
-                exclude: /(node_modules|bower_components)/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['env','stage-0'],
-                        plugins: ['@babel/plugin-proposal-class-properties','transform-runtime']
-                    }
-                }
-            }*/
-            {test:/.js$/,use:['babel-loader'],exclude:/node_modules/}
+            {test:/.js$/,use:['babel-loader'],exclude:/node_modules/},
+            {test: /\.vue$/, use: 'vue-loader'}
         ]
+    },
+
+    plugins: [
+        new vueLoaderPlugin()/*,
+        new HtmlWebpackPlugin({
+            template: path.join(__dirname,'./src/index.html'),
+            filename: "index.html"
+        })*/
+    ],
+    resolve: {
+
+        alias: {"vue$":"vue/dist/vue.js"}
+
     }
 
 };
